@@ -12,7 +12,7 @@ Sometimes in class, even though the teacher's explaining, it just doesn't click.
 
 ## How I Built It
 
-At the core of \*\*Animind\*\* is a modular multi-agent system, fully powered by Google's AI ecosystem. Everything runs through \*\*FastAPI\*\*, with the AI heavy lifting handled by Gemini models accessed via \*\*OpenRouter\*\* and \*\*Vertex AI\*\*.
+At the core of **Animind** is a modular multi-agent system, fully powered by Google's AI ecosystem. Everything runs through **FastAPI**, with the AI heavy lifting handled by Gemini models accessed via **OpenRouter** and **Vertex AI**.
 
 
 
@@ -20,53 +20,53 @@ At the core of \*\*Animind\*\* is a modular multi-agent system, fully powered by
 
 
 
-\- \*\*Manim Agent\*\*
+- **Manim Agent**
 
-&#x20; \- Built using \*\*Google ADK\*\* and the \*\*Plan-ReAct\*\* framework.
+- Built using **Google ADK** and the **Plan-ReAct** framework.
 
-&#x20; \- Takes a narration prompt.
+- Takes a narration prompt.
 
-&#x20; \- Researches using a \*\*RAG tool\*\* (powered by \*\*Vertex AI\*\*).
+- Researches using a **RAG tool** (powered by **Vertex AI**).
 
-&#x20; \- Generates Python/Manim code.
+ - Generates Python/Manim code.
 
-&#x20; \- Runs and validates animations to ensure alignment with the narration.
-
-
-
-\- \*\*Video Agent\*\*
-
-&#x20; \- A \*\*SequentialAgent\*\* made up of three sub-agents:
-
-&#x20;   1\. \*\*Plan Generator\*\*: Lays out the scene-by-scene plan.
-
-&#x20;   2\. \*\*Scene Generator\*\*: Generates animation, voiceover, and media merging.
-
-&#x20;   3\. \*\*Final Assembler\*\*: Stitches everything into a full video.
+ - Runs and validates animations to ensure alignment with the narration.
 
 
 
-\- \*\*RAG Agent\*\*
+- **Video Agent**
 
-&#x20; \- Lightweight but critical.
+ - A **SequentialAgent** made up of three sub-agents:
 
-&#x20; \- Retrieves from a custom corpus of Manim documentation, example code, and community resources.
+   1. **Plan Generator**: Lays out the scene-by-scene plan.
 
-&#x20; \- Prevents hallucination and ensures factual accuracy.
+   2. **Scene Generator**: Generates animation, voiceover, and media merging.
 
-
-
-\### System Design
+   3. **Final Assembler**: Stitches everything into a full video.
 
 
 
-\- Every agent runs inside an execution pipeline with built-in retries, validation, and error-recovery—especially for code generation and Manim rendering.
+- **RAG Agent**
 
-\- Frontend is intentionally kept lightweight (\*\*React / Vite / TypeScript\*\*).
+- Lightweight but critical.
 
-\- Frontend only streams outputs and statuses from the backend—no direct LLM calls.
+- Retrieves from a custom corpus of Manim documentation, example code, and community resources.
 
-\- All components are modular: agents are interchangeable, and models are swappable just by flipping environment variables.Accomplishments I'm Proud Of
+- Prevents hallucination and ensures factual accuracy.
+
+
+
+### System Design
+
+
+
+- Every agent runs inside an execution pipeline with built-in retries, validation, and error-recovery—especially for code generation and Manim rendering.
+
+- Frontend is intentionally kept lightweight (\*\*React / Vite / TypeScript\*\*).
+
+- Frontend only streams outputs and statuses from the backend—no direct LLM calls.
+
+- All components are modular: agents are interchangeable, and models are swappable just by flipping environment variables.Accomplishments I'm Proud Of
 
 Built both the frontend and backend from scratch. Pulled an insane 12-hour work session, crashed for 4 hours, and then pushed another 15 straight. ([Proof here](https://www.youtube.com/@aidanandrews/streams))
 
