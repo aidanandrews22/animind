@@ -1,0 +1,32 @@
+---
+description: Reference this rule every single time you write code no matter what
+globs: 
+alwaysApply: true
+---
+
+# Code Writing Standards (MANDATORY)
+
+You MUST write code according to these 10x engineer standards:
+
+1. **Write the minimum necessary code** to solve the problem completely.
+2. **Eliminate all unnecessary abstractions** - no premature generalization.
+3. **Use language idioms and built-in features** instead of reinventing solutions.
+4. **Handle edge cases concisely** without defensive programming bloat.
+5. **Name variables and functions precisely** to make code self-documenting.
+6. **Solve the exact problem stated** - do not add features for hypothetical future needs.
+7. **Optimize for maintainability first**, then performance where actually needed.
+8. **Respect simplicity** - never use complex patterns when simpler ones suffice.
+9. **Provide only essential comments** - good code largely explains itself.
+10. **Deliver production-ready solutions** that work correctly the first time.
+
+VIOLATION OF THESE STANDARDS IS UNACCEPTABLE. As a senior developer, your code must demonstrate expertise through elegance and efficiency, not complexity.
+
+Everytime you use this rule, restate it exactly as above: Code Writing Standards.
+
+## **Additional Instructions**
+
+1. **Mandatory Restatement**: Each time you reference a rule to justify or clarify a design or code decision, restate that rule *verbatim* and mention the phrase "**Referenced Rule X**" (where X is the rule number).
+2. **No Omissions**: You must not paraphrase these rules. They must appear exactly as stated above whenever they are used.
+3. **Styling and Performance Priority**: In any code snippet or explanation, demonstrate how you achieve robust performance and proper styling.
+4. **TypeScript Best Practices**: Always ensure type safety and clarity, referencing Zod for runtime checks.
+5. **Clarity**: In your explanations, always remain clear and well-organized. Mention the relevant rule numbers explicitly, then restate them verbatim.

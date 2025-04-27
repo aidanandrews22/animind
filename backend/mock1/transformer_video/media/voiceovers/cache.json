@@ -1,0 +1,65 @@
+[
+  {
+    "input_text": "Welcome! Today we'll peer inside Transformers\u2014the model powering language understanding and generation. At their core lies attention, letting networks focus on the most relevant parts of input.",
+    "input_data": {
+      "input_text": "Welcome! Today we'll peer inside Transformers\u2014the model powering language understanding and generation. At their core lies attention, letting networks focus on the most relevant parts of input.",
+      "service": "gtts"
+    },
+    "original_audio": "welcome-today-we-ll-peer-inside-transformers-the-56c1fcd0.mp3",
+    "final_audio": "welcome-today-we-ll-peer-inside-transformers-the-56c1fcd0.mp3"
+  },
+  {
+    "input_text": "Welcome! Today we'll peer inside Transformers\u2014the model powering language understanding and generation. At their core lies attention, letting networks focus on the most relevant parts of input.",
+    "input_data": {
+      "input_text": "Welcome! Today we'll peer inside Transformers\u2014the model powering language understanding and generation. At their core lies attention, letting networks focus on the most relevant parts of input.",
+      "service": "gtts"
+    },
+    "original_audio": "welcome-today-we-ll-peer-inside-transformers-the-56c1fcd0.mp3",
+    "final_audio": "welcome-today-we-ll-peer-inside-transformers-the-56c1fcd0.mp3"
+  },
+  {
+    "input_text": "We start with a sequence of word embeddings\u2014numeric vectors representing each token. These embeddings carry semantic meaning in high-dimensional space.",
+    "input_data": {
+      "input_text": "We start with a sequence of word embeddings\u2014numeric vectors representing each token. These embeddings carry semantic meaning in high-dimensional space.",
+      "service": "gtts"
+    },
+    "original_audio": "we-start-with-a-sequence-of-word-embeddings-96a71b27.mp3",
+    "final_audio": "we-start-with-a-sequence-of-word-embeddings-96a71b27.mp3"
+  },
+  {
+    "input_text": "Each embedding is projected into three spaces\u2014queries, keys, and values. Queries ask questions, keys store content, and values hold the information we'll ultimately aggregate.",
+    "input_data": {
+      "input_text": "Each embedding is projected into three spaces\u2014queries, keys, and values. Queries ask questions, keys store content, and values hold the information we'll ultimately aggregate.",
+      "service": "gtts"
+    },
+    "original_audio": "each-embedding-is-projected-into-three-spaces-373fddd6.mp3",
+    "final_audio": "each-embedding-is-projected-into-three-spaces-373fddd6.mp3"
+  },
+  {
+    "input_text": "Attention scores come from dot products between a query and each key, scaled by the square root of their dimension, then normalized via softmax. These weights determine how much we 'attend' to each value, which are then aggregated into our output.",
+    "input_data": {
+      "input_text": "Attention scores come from dot products between a query and each key, scaled by the square root of their dimension, then normalized via softmax. These weights determine how much we 'attend' to each value, which are then aggregated into our output.",
+      "service": "gtts"
+    },
+    "original_audio": "attention-scores-come-from-dot-products-between-a-2fd9b48b.mp3",
+    "final_audio": "attention-scores-come-from-dot-products-between-a-2fd9b48b.mp3"
+  },
+  {
+    "input_text": "Transformers use multiple attention heads in parallel\u2014each learning to focus on different relationships. Their outputs are concatenated and linearly transformed back into our model's dimension.",
+    "input_data": {
+      "input_text": "Transformers use multiple attention heads in parallel\u2014each learning to focus on different relationships. Their outputs are concatenated and linearly transformed back into our model's dimension.",
+      "service": "gtts"
+    },
+    "original_audio": "transformers-use-multiple-attention-heads-in-759ac421.mp3",
+    "final_audio": "transformers-use-multiple-attention-heads-in-759ac421.mp3"
+  },
+  {
+    "input_text": "Because attention has no inherent notion of order, we inject positional encodings\u2014 sinusoids of varying frequencies\u2014so the model knows the position of each token in the sequence.",
+    "input_data": {
+      "input_text": "Because attention has no inherent notion of order, we inject positional encodings\u2014 sinusoids of varying frequencies\u2014so the model knows the position of each token in the sequence.",
+      "service": "gtts"
+    },
+    "original_audio": "because-attention-has-no-inherent-notion-of-order-20f7b79a.mp3",
+    "final_audio": "because-attention-has-no-inherent-notion-of-order-20f7b79a.mp3"
+  }
+]

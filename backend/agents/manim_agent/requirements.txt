@@ -1,0 +1,5 @@
+google-adk>=0.4.0
+google-generativeai>=0.3.0
+manim>=0.17.3
+litellm>=0.1.0
+python-dotenv>=1.0.0 

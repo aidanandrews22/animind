@@ -1,0 +1,12 @@
+1
+00:00:00,000 --> 00:00:06,468
+Welcome! Today we'll see how convolutional neural networks—CNNs—power modern
+
+2
+00:00:06,568 --> 00:00:11,567
+image recognition. By the end, you'll understand how simple
+
+3
+00:00:11,667 --> 00:00:16,580
+filters detect edges, textures, and even complex patterns.
+

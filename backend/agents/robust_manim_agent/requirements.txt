@@ -1,0 +1,4 @@
+google-adk
+manim
+python-dotenv
+vertexai>=1.0.0 

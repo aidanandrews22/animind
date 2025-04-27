@@ -1,0 +1,12 @@
+{
+  "elements": [
+    {
+      "type": "text",
+      "content": "Introduction to Ball rolling down a hill (Physics)",
+      "position": "center",
+      "animation": "Write",
+      "timing": "At the beginning"
+    }
+  ],
+  "transitions": []
+}

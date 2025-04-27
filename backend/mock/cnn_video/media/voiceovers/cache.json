@@ -1,0 +1,92 @@
+[
+  {
+    "input_text": "Welcome! Today we'll see how convolutional neural networks\u2014CNNs\u2014power modern image recognition. By the end, you'll understand how simple filters detect edges, textures, and even complex patterns.",
+    "input_data": {
+      "input_text": "Welcome! Today we'll see how convolutional neural networks\u2014CNNs\u2014power modern image recognition. By the end, you'll understand how simple filters detect edges, textures, and even complex patterns.",
+      "service": "gtts"
+    },
+    "original_audio": "welcome-today-we-ll-see-how-convolutional-neural-5fde6d2a.mp3",
+    "final_audio": "welcome-today-we-ll-see-how-convolutional-neural-5fde6d2a.mp3"
+  },
+  {
+    "input_text": "Every colored image is just a grid of numbers. Here, we convert pixels to a matrix of intensities. Our goal: learn patterns in these numbers automatically.",
+    "input_data": {
+      "input_text": "Every colored image is just a grid of numbers. Here, we convert pixels to a matrix of intensities. Our goal: learn patterns in these numbers automatically.",
+      "service": "gtts"
+    },
+    "original_audio": "every-colored-image-is-just-a-grid-of-numbers-here-8f3f1d64.mp3",
+    "final_audio": "every-colored-image-is-just-a-grid-of-numbers-here-8f3f1d64.mp3"
+  },
+  {
+    "input_text": "Convolution: slide a small filter across the image, multiply overlapping values, and sum them. Each result populates a new feature map\u2014revealing edges or textures our network can learn.",
+    "input_data": {
+      "input_text": "Convolution: slide a small filter across the image, multiply overlapping values, and sum them. Each result populates a new feature map\u2014revealing edges or textures our network can learn.",
+      "service": "gtts"
+    },
+    "original_audio": "convolution-slide-a-small-filter-across-the-image-f507dddc.mp3",
+    "final_audio": "convolution-slide-a-small-filter-across-the-image-f507dddc.mp3"
+  },
+  {
+    "input_text": "By using multiple filters, a CNN can detect diverse features\u2014horizontal edges, vertical lines, or color patterns\u2014all at once, resulting in multiple feature maps.",
+    "input_data": {
+      "input_text": "By using multiple filters, a CNN can detect diverse features\u2014horizontal edges, vertical lines, or color patterns\u2014all at once, resulting in multiple feature maps.",
+      "service": "gtts"
+    },
+    "original_audio": "by-using-multiple-filters-a-cnn-can-detect-diverse-36027306.mp3",
+    "final_audio": "by-using-multiple-filters-a-cnn-can-detect-diverse-36027306.mp3"
+  },
+  {
+    "input_text": "Welcome! Today we'll see how convolutional neural networks\u2014CNNs\u2014power modern image recognition. By the end, you'll understand how simple filters detect edges, textures, and even complex patterns.",
+    "input_data": {
+      "input_text": "Welcome! Today we'll see how convolutional neural networks\u2014CNNs\u2014power modern image recognition. By the end, you'll understand how simple filters detect edges, textures, and even complex patterns.",
+      "service": "gtts"
+    },
+    "original_audio": "welcome-today-we-ll-see-how-convolutional-neural-5fde6d2a.mp3",
+    "final_audio": "welcome-today-we-ll-see-how-convolutional-neural-5fde6d2a.mp3"
+  },
+  {
+    "input_text": "Every colored image is just a grid of numbers. Here, we convert pixels to a matrix of intensities. Our goal: learn patterns in these numbers automatically.",
+    "input_data": {
+      "input_text": "Every colored image is just a grid of numbers. Here, we convert pixels to a matrix of intensities. Our goal: learn patterns in these numbers automatically.",
+      "service": "gtts"
+    },
+    "original_audio": "every-colored-image-is-just-a-grid-of-numbers-here-8f3f1d64.mp3",
+    "final_audio": "every-colored-image-is-just-a-grid-of-numbers-here-8f3f1d64.mp3"
+  },
+  {
+    "input_text": "Convolution: slide a small filter across the image, multiply overlapping values, and sum them. Each result populates a new feature map\u2014revealing edges or textures our network can learn.",
+    "input_data": {
+      "input_text": "Convolution: slide a small filter across the image, multiply overlapping values, and sum them. Each result populates a new feature map\u2014revealing edges or textures our network can learn.",
+      "service": "gtts"
+    },
+    "original_audio": "convolution-slide-a-small-filter-across-the-image-f507dddc.mp3",
+    "final_audio": "convolution-slide-a-small-filter-across-the-image-f507dddc.mp3"
+  },
+  {
+    "input_text": "By using multiple filters, a CNN can detect diverse features\u2014horizontal edges, vertical lines, or color patterns\u2014all at once, resulting in multiple feature maps.",
+    "input_data": {
+      "input_text": "By using multiple filters, a CNN can detect diverse features\u2014horizontal edges, vertical lines, or color patterns\u2014all at once, resulting in multiple feature maps.",
+      "service": "gtts"
+    },
+    "original_audio": "by-using-multiple-filters-a-cnn-can-detect-diverse-36027306.mp3",
+    "final_audio": "by-using-multiple-filters-a-cnn-can-detect-diverse-36027306.mp3"
+  },
+  {
+    "input_text": "Welcome! Today we'll see how convolutional neural networks\u2014CNNs\u2014power modern image recognition. By the end, you'll understand how simple filters detect edges, textures, and even complex patterns.",
+    "input_data": {
+      "input_text": "Welcome! Today we'll see how convolutional neural networks\u2014CNNs\u2014power modern image recognition. By the end, you'll understand how simple filters detect edges, textures, and even complex patterns.",
+      "service": "gtts"
+    },
+    "original_audio": "welcome-today-we-ll-see-how-convolutional-neural-5fde6d2a.mp3",
+    "final_audio": "welcome-today-we-ll-see-how-convolutional-neural-5fde6d2a.mp3"
+  },
+  {
+    "input_text": "Every colored image is just a grid of numbers. Here, we convert pixels to a matrix of intensities. Our goal: learn patterns in these numbers automatically.",
+    "input_data": {
+      "input_text": "Every colored image is just a grid of numbers. Here, we convert pixels to a matrix of intensities. Our goal: learn patterns in these numbers automatically.",
+      "service": "gtts"
+    },
+    "original_audio": "every-colored-image-is-just-a-grid-of-numbers-here-8f3f1d64.mp3",
+    "final_audio": "every-colored-image-is-just-a-grid-of-numbers-here-8f3f1d64.mp3"
+  }
+]

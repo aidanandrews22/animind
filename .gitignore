@@ -1,0 +1,4 @@
+backups/
+backend/agents/video/models/kokoro-v0_19.onnx
+backend/agents/misc/voice_models/kokoro-v0_19.onnx
+**/**/kokoro-v0_19.onnx

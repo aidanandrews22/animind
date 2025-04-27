@@ -1,0 +1,5 @@
+google-cloud-texttospeech>=2.19.0
+google-adk>=0.0.1
+ffmpeg-python>=0.2.0
+python-dotenv>=1.0.0
+dataclasses>=0.8; python_version < '3.7' 
