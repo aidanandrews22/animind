@@ -1,28 +1,30 @@
 import { useState, useEffect } from "react";
 import EmbeddedVideo from "./EmbeddedVideo";
 
-interface VideoGenerationProgressProps {
+interface AnimationGenerationProgressProps {
   query: string;
   onComplete: () => void;
   videoId: string;
   videoTitle: string;
 }
 
+// Animation generation stages for Manim
 const GENERATION_STAGES = [
-  { name: "Analyzing query", duration: 1000 },
-  { name: "Researching physics concepts", duration: 1200 },
-  { name: "Extracting key trajectory formulas", duration: 1200 },
-  { name: "Generating equation visualizations", duration: 1500 },
-  { name: "Creating trajectory animations", duration: 1500 },
-  { name: "Finalizing video", duration: 1500 },
+  { name: "Analyzing mathematical request", duration: 1000 },
+  { name: "Designing mathematical scene", duration: 1200 },
+  { name: "Setting up coordinate systems", duration: 1000 },
+  { name: "Creating mathematical objects", duration: 1500 },
+  { name: "Generating animation transforms", duration: 1500 },
+  { name: "Rendering animation frames", duration: 1800 },
+  { name: "Finalizing animation", duration: 1000 },
 ];
 
-export default function VideoGenerationProgress({
+export default function AnimationGenerationProgress({
   query,
   onComplete,
   videoId,
   videoTitle,
-}: VideoGenerationProgressProps) {
+}: AnimationGenerationProgressProps) {
   const [currentStage, setCurrentStage] = useState(0);
   const [progress, setProgress] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
@@ -94,9 +96,9 @@ export default function VideoGenerationProgress({
       ) : (
         <div className="p-5 bg-gray-50 dark:bg-gray-800">
           <div className="mb-4">
-            <h3 className="text-lg font-medium mb-1">Generating your video</h3>
+            <h3 className="text-lg font-medium mb-1">Generating your animation</h3>
             <p className="text-sm text-gray-500">
-              Creating a video about "{query}"
+              Creating a mathematical animation of "{query}"
             </p>
           </div>
           

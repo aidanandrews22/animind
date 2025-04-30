@@ -1,0 +1,6 @@
+(Scene opens with a hill and a ball at the top.)
+Narrator: "We'll observe a ball rolling down a hill, accelerating as it goes."
+(The ball starts rolling down the hill, and the position vs. time graph starts to grow.)
+Narrator: "Simultaneously, we'll plot its position against time, visualizing its acceleration."
+(The camera follows the ball as it rolls down the hill.)
+Narrator: "Notice how the graph's slope increases, indicating the ball's increasing speed."

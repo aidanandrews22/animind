@@ -1,0 +1,8 @@
+openai>=1.6.0
+PyYAML>=6.0
+manim>=0.17.3
+flake8>=6.0.0
+fastapi>=0.103.0
+uvicorn>=0.23.0
+pydantic>=2.4.0
+python-dotenv>=1.0.0 

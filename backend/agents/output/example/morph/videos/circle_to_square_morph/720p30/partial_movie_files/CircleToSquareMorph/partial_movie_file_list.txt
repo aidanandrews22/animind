@@ -1,6 +1,0 @@
-# This file is used internally by FFMPEG.
-file 'file:/Users/aidan/Documents/Code/Projects/animind/backend/agents/example/morph/videos/circle_to_square_morph/720p30/partial_movie_files/CircleToSquareMorph/2016333726_1429327691_223132457.mp4'
-file 'file:/Users/aidan/Documents/Code/Projects/animind/backend/agents/example/morph/videos/circle_to_square_morph/720p30/partial_movie_files/CircleToSquareMorph/543634251_1432596116_3712042578.mp4'
-file 'file:/Users/aidan/Documents/Code/Projects/animind/backend/agents/example/morph/videos/circle_to_square_morph/720p30/partial_movie_files/CircleToSquareMorph/543634251_2338842813_578674303.mp4'
-file 'file:/Users/aidan/Documents/Code/Projects/animind/backend/agents/example/morph/videos/circle_to_square_morph/720p30/partial_movie_files/CircleToSquareMorph/543634251_1432596116_3618985850.mp4'
-file 'file:/Users/aidan/Documents/Code/Projects/animind/backend/agents/example/morph/videos/circle_to_square_morph/720p30/partial_movie_files/CircleToSquareMorph/543634251_1440743432_4291835338.mp4'

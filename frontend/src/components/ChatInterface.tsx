@@ -17,7 +17,7 @@ import {
   createChatSession,
   getChatSessionById
 } from "../services/chatService";
-import VideoGenerationProgress from "./VideoGenerationProgress";
+import AnimationGenerationProgress from "./VideoGenerationProgress";
 import EmbeddedVideo from "./EmbeddedVideo";
 
 // Import CheckIcon and ClipboardIcon as SVG components to avoid lucide-react dependency
@@ -172,15 +172,18 @@ export default function ChatInterface({ courseId, sessionId }: ChatInterfaceProp
   const [isGeneratingVideo, setIsGeneratingVideo] = useState(false);
   const [videoGenerationQuery, setVideoGenerationQuery] = useState("");
   const [videoGenerationComplete, setVideoGenerationComplete] = useState(false);
+  const [videoGenerationStatus, setVideoGenerationStatus] = useState("");
+  const [videoId, setVideoId] = useState<string | null>(null);
+  const [isVideoModeEnabled, setIsVideoModeEnabled] = useState(false);
 
-  // Video generation suggestion prompts
+  // Animation generation suggestion prompts
   const videoSuggestions = [
-    "Create an introduction video about the key concepts in this course",
-    "Generate a tutorial video explaining the fundamentals of this topic",
-    "Create a summary video covering the main points from my course content",
-    "Generate an explainer video about the most difficult concept in this course",
-    "Create a video comparing the different approaches discussed in the course",
-    "Help me find trajectories in physics using integrals"
+    "Create an animation showing a circle rolling on a flat surface without slipping",
+    "Generate an animation of a pendulum with varying length over time",
+    "Visualize projectile motion with air resistance",
+    "Create an animation explaining the concept of partial derivatives with a 3D surface",
+    "Animate the solution to the wave equation in 2D",
+    "Show how to find trajectories in physics using integrals"
   ];
 
   // Load messages when sessionId changes
@@ -304,6 +307,122 @@ export default function ChatInterface({ courseId, sessionId }: ChatInterfaceProp
     }
   };
 
+  // Function to handle animation generation
+  const generateVideo = async (prompt: string, sessionId: string) => {
+    if (!userId) return;
+    
+    try {
+      setStreamingContent("Starting animation generation process...");
+      
+      // Generate a unique id for the animation path
+      const uniqueId = crypto.randomUUID();
+      const bucketPath = `animations/${userId}/${uniqueId}`;
+      
+      // Request body for animation generation according to API spec
+      const requestBody = {
+        prompt: prompt,
+        output_dir: `output/${uniqueId}`,
+        file_name: uniqueId,
+        user_id: userId, // Must be a valid UUID
+        bucket_path: bucketPath,
+        title: "Manim Animation: " + (prompt.length > 30 ? prompt.substring(0, 30) + "..." : prompt),
+        description: prompt,
+        course_id: courseId // Optional UUID
+      };
+      
+      // Start the animation generation
+      const response = await fetch("http://localhost:2222/generate", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestBody),
+      });
+      
+      if (!response.ok) {
+        throw new Error(`API error: ${response.status}`);
+      }
+      
+      // Set up event source for progress updates (separate from the POST request)
+      const eventSource = new EventSource("http://localhost:2222/stream-updates");
+      
+      eventSource.onmessage = (event) => {
+        const data = event.data;
+        
+        // Parse the message according to the API spec
+        if (data.startsWith('status:')) {
+          const statusMessage = data.substring('status:'.length).trim();
+          setVideoGenerationStatus(statusMessage);
+          setStreamingContent(prev => `${prev}\n\n${statusMessage}`);
+        } else if (data.startsWith('log:')) {
+          const logMessage = data.substring('log:'.length).trim();
+          console.log("Animation generation log:", logMessage);
+        } else if (data.startsWith('error:')) {
+          const errorMessage = data.substring('error:'.length).trim();
+          console.error("Animation generation error:", errorMessage);
+          setStreamingContent(prev => `${prev}\n\nError: ${errorMessage}`);
+        } else if (data.startsWith('result:')) {
+          try {
+            const resultData = JSON.parse(data.substring('result:'.length).trim());
+            console.log("Animation generation complete:", resultData);
+            
+            if (resultData.video_id) {
+              setVideoId(resultData.video_id);
+              
+              // Add the assistant message with video embed
+              const assistantMessage: ChatMessage = {
+                id: Date.now().toString(),
+                role: "assistant",
+                content: `I've created an animation based on your request:\n\n<video-embed id="${resultData.video_id}" title="${requestBody.title}" />`,
+                timestamp: Date.now(),
+              };
+              
+              setMessages((prev) => [...prev, assistantMessage]);
+              
+              // Store the assistant message in Supabase
+              if (sessionId) {
+                addChatMessage({
+                  session_id: sessionId,
+                  role: 'assistant',
+                  content: assistantMessage.content,
+                });
+              }
+              
+              setVideoGenerationComplete(true);
+              setIsLoading(false);
+              setStreamingContent("");
+            }
+          } catch (e) {
+            console.error("Error parsing result data:", e);
+          }
+        } else if (data.includes('complete') || data.status === 'complete') {
+          console.log("EventSource reports completion, closing connection");
+          eventSource.close();
+        }
+      };
+      
+      eventSource.onerror = (error) => {
+        console.error("EventSource error:", error);
+        eventSource.close();
+        
+        if (!videoId) {
+          setStreamingContent(prev => `${prev}\n\nError receiving updates from the server.`);
+        }
+      };
+      
+      // Set video generation state
+      setVideoGenerationQuery(prompt);
+      setIsGeneratingVideo(true);
+      setVideoGenerationComplete(false);
+      
+      return true;
+    } catch (error) {
+      console.error("Error starting animation generation:", error);
+      setStreamingContent(prev => `${prev}\n\nError: ${error instanceof Error ? error.message : 'Unknown error'}`);
+      return false;
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim() || isLoading || !userId) return;
@@ -330,8 +449,8 @@ export default function ChatInterface({ courseId, sessionId }: ChatInterfaceProp
     setIsLoading(true);
     setStreamingContent("");
 
-    // Check if this is our special video generation prompt
-    const isVideoGenerationPrompt = input.toLowerCase().includes("trajectories in physics using integrals");
+    // Check if animation generation is requested
+    const shouldGenerateAnimation = isVideoModeEnabled;
 
     try {
       // Create a new chat session if this is the first message
@@ -357,6 +476,12 @@ export default function ChatInterface({ courseId, sessionId }: ChatInterfaceProp
           role: 'user',
           content: input,
         });
+        
+        if (shouldGenerateAnimation) {
+          // Generate video with the new session ID
+          await generateVideo(input, newSession.id);
+          return;
+        }
       } else {
         // Store the user message in Supabase
         await addChatMessage({
@@ -364,55 +489,12 @@ export default function ChatInterface({ courseId, sessionId }: ChatInterfaceProp
           role: 'user',
           content: input,
         });
-      }
-
-      if (isVideoGenerationPrompt) {
-        // Start fake video generation process with streaming updates
-        setStreamingContent("I'll generate a video about physics trajectories and integrals for you. Starting the video generation process...");
         
-        // Stream progress updates instead of staying silent
-        setTimeout(() => {
-          setStreamingContent(prev => prev + "\n\nAnalyzing your query about trajectories in physics...");
-        }, 1000);
-        
-        setTimeout(() => {
-          setStreamingContent(prev => prev + "\n\nResearching relevant physics equations and integral calculus concepts...");
-        }, 3000);
-        
-        setTimeout(() => {
-          setStreamingContent(prev => prev + "\n\nCreating visualizations of trajectory calculations with integral formulas...");
-        }, 5000);
-        
-        // Add the assistant message with video embed after showing enough progress
-        setTimeout(() => {
-          // Add final message with embedded video
-          const assistantMessage: ChatMessage = {
-            id: Date.now().toString(),
-            role: "assistant",
-            content: "I've created a video demonstrating trajectories in physics using integrals:\n\n<video-embed id=\"trajectories-integrals\" title=\"Trajectories and Integrals\" />",
-            timestamp: Date.now(),
-          };
-          
-          setMessages((prev) => [...prev, assistantMessage]);
-          
-          // Store the assistant message in Supabase
-          if (currentSessionId) {
-            addChatMessage({
-              session_id: currentSessionId,
-              role: 'assistant',
-              content: assistantMessage.content,
-            });
-          }
-          
-          // Set video generation state
-          setVideoGenerationQuery(input);
-          setIsGeneratingVideo(true);
-          setVideoGenerationComplete(false);
-          setStreamingContent("");
-          setIsLoading(false);
-        }, 7000);
-        
-        return;
+        if (shouldGenerateAnimation) {
+          // Generate video with existing session ID
+          await generateVideo(input, currentSessionId);
+          return;
+        }
       }
 
       // Regular flow for other inputs
@@ -645,7 +727,7 @@ export default function ChatInterface({ courseId, sessionId }: ChatInterfaceProp
             {isGeneratingVideo && videoGenerationComplete ? (
               <EmbeddedVideo videoId={match[1]} title={match[2]} />
             ) : isGeneratingVideo ? (
-              <VideoGenerationProgress
+              <AnimationGenerationProgress
                 query={videoGenerationQuery}
                 videoId={match[1]}
                 videoTitle={match[2]}
@@ -851,11 +933,11 @@ export default function ChatInterface({ courseId, sessionId }: ChatInterfaceProp
       {/* Message container */}
       <div
         ref={messageContainerRef}
-        className="flex-1 overflow-y-auto pt-4 px-4 relative scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-600 scrollbar-track-transparent max-w-3xl mx-10"
+        className="flex-1 overflow-y-auto pt-4 px-4 relative scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-gray-600 scrollbar-track-transparent max-w-3xl mx-auto w-full"
       >
-        <div className="w-full">
+        <div className="w-full flex flex-col items-center justify-center">
           {messages.length === 0 ? (
-            <div className="flex flex-col items-center justify-center h-full text-center">
+            <div className="flex flex-col items-center justify-center h-full text-center w-full max-w-lg">
               <div className="mb-6">
                 <svg
                   width="64"
@@ -874,13 +956,13 @@ export default function ChatInterface({ courseId, sessionId }: ChatInterfaceProp
               </h3>
               <p className="text-gray-500 max-w-md mb-6">
                 Ask any question about your course content, request
-                explanations, or generate resources
+                explanations, or generate mathematical animations
               </p>
 
-              {/* Video suggestions */}
+              {/* Animation suggestions */}
               <div className="max-w-lg w-full">
                 <div className="text-sm font-medium text-gray-500 mb-3">
-                  Try generating a video:
+                  Try generating an animation:
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                   {videoSuggestions.map((suggestion, index) => (
@@ -1007,7 +1089,7 @@ export default function ChatInterface({ courseId, sessionId }: ChatInterfaceProp
               ref={textareaRef}
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Type your message..."
+              placeholder={isVideoModeEnabled ? "Describe the animation you want to generate..." : "Type your message..."}
               className="flex-1 p-4 bg-transparent outline-none resize-none min-h-[56px] max-h-[25vh] overflow-y-auto"
               disabled={isLoading}
               rows={1}
@@ -1023,7 +1105,39 @@ export default function ChatInterface({ courseId, sessionId }: ChatInterfaceProp
               }}
             />
           </div>
-          <div className="flex items-center px-4 py-2 justify-end">
+          <div className="flex items-center px-4 py-2 justify-between">
+            {/* Video generation toggle */}
+            <button
+              type="button"
+              onClick={() => setIsVideoModeEnabled(prev => !prev)}
+              className={`flex items-center text-sm transition-colors ${
+                isVideoModeEnabled 
+                ? "text-blue-500 hover:text-blue-600" 
+                : "text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
+              }`}
+              aria-label={isVideoModeEnabled ? "Disable animation generation" : "Enable animation generation"}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="mr-1"
+              >
+                <path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14v-4z"></path>
+                <rect x="3" y="6" width="12" height="12" rx="2" ry="2"></rect>
+              </svg>
+              {isVideoModeEnabled ? "Animation Mode" : "Animation"}
+              {isVideoModeEnabled && (
+                <span className="inline-block ml-1.5 w-2 h-2 bg-blue-500 rounded-full"></span>
+              )}
+            </button>
+            
             <button
               type="submit"
               disabled={!input.trim() || isLoading}

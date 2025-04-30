@@ -1,0 +1,4 @@
+We begin by creating the hill using a parametric function.
+Next, we create a blue ball.
+We then position the ball at the top of the hill.
+Finally, we adjust the camera to focus on the hill and the ball.
